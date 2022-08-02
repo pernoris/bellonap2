@@ -24,10 +24,10 @@
             ],
             "styles": [
               "src/styles.css",
-              "bellonap/node_modules/bootstrap/dist/css/bootstrap.css"
+              "node_modules/bootstrap/dist/css/bootstrap.css"            
             ],
             "scripts": [
-              "bellonap2/node_modules/bootstrap/dist/js/bootstrap.js"
+              "node_modules/bootstrap/dist/js/bootstrap.js"           
             ]
           },
           "configurations": {
