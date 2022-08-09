@@ -19,7 +19,7 @@ public class RolService {
     iRolRepository irolRepository;
     
     public Optional<Rol> getByRolNombre(RolNombre rolNombre){
-        return irolRepository.findByRoleNombre(rolNombre);
+        return irolRepository.findByRolNombre(rolNombre);
     }
     
     public void save(Rol rol){
