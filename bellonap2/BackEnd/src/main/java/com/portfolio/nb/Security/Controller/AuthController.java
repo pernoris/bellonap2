@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
 package com.portfolio.nb.Security.Controller;
 
 import com.portfolio.nb.Security.Dto.JwtDto;
@@ -17,7 +18,6 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -59,12 +59,14 @@ public class AuthController {
          if(usuarioService.existByEmail(nuevoUsuario.getEmail()))
         return new ResponseEntity(new Mensaje("Ese email ya existe"), HttpStatus.BAD_REQUEST);
     
-         Usuario usuario =  new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(), nuevoUsuario.getEmail(), passwordEncoder.encode(nuevoUsuario.getPassword()));
+         Usuario usuario =  new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(),
+                 nuevoUsuario.getEmail(), passwordEncoder.encode(nuevoUsuario.getPassword()));
 
         Set<Rol> roles = new HashSet<>();
         roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).get());
             
-        if(nuevoUsuario.getRoles().contains("admin"))roles.add(rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get());
+        if(nuevoUsuario.getRoles().contains("admin"))
+            roles.add(rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get());
         usuario.setRoles(roles);
         usuarioService.save(usuario);
         
@@ -76,9 +78,11 @@ public class AuthController {
         if(bindingResult.hasErrors())
             return new ResponseEntity(new Mensaje("Campos mal puestos"), HttpStatus.BAD_REQUEST);
         
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getNombreUsuario(), loginUsuario.getPassword()));
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                loginUsuario.getNombreUsuario(), loginUsuario.getPassword()));
     
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        
         String jwt = jwtProvider.generateToken(authentication);
         
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
