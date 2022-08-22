@@ -1,8 +1,9 @@
 <div class="row">
-    <h1>Hard & Soft skills</h1>
-    <div class="col-lg-2">
+    <h1>Hard & Soft Skills</h1>
+
+    <div class="col-lg-11">
         <button type="button" class="btn btn-dark" routerLink="/nuevahys" *ngIf="isLogged">
-            Agregar Hard & Soft skills
+            Agregar Hard & Soft Skills
         </button>
     </div>
 
@@ -25,14 +26,11 @@
             [lazy]="true"     
         ></circle-progress>
 
-        <div class="col lg 1"></div>
-        <div class="col-lg-11">
-            <td *ngIf="isLogged">
+     
+        <div class="col-sm-4 col-md-2 col-lg-4 align-items-start flex-column" *ngIf="isLogged">
                  <button class="btn btn-light" routerLink="/edithys/{{Skill.id}}">
-                     <i class="bi bi-pencil-fill"></i> EDITAR</button>
-            </td>
-            <td *ngIf="isLogged">
+                     <i class="bi bi-pencil-fill"></i> EDITAR</button>           
                 <button class="btn btn-danger" (click)="delete(Skill.id)">
-                    <i class="bi bi-trash-fill"></i> BORRAR</button>
-            </td>
-         </div>
+                    <i class="bi bi-trash-fill"></i> BORRAR</button>          
+         </div>        
+    </div>
