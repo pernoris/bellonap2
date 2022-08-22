@@ -6,7 +6,7 @@
         </button>
     </div>
 
-        <div class="col-lg-11">
+    <div class="col-lg-11">
         <table class="table">
             <tbody>
                 <tr *ngFor="let Proyecto of proyecto">
@@ -22,11 +22,11 @@
 
                     <td *ngIf="isLogged">
                         <button class="btn btn-light" routerLink="/editpro/{{Proyecto.id}}">
-                            <i class="bi bi-pencil-fill"></i> EDITAR</button>
+                            <i class="bi bi-pencil-fill"></i> </button>
                     <td class="col-sm-11 col-md-7 col-lg-4 parte3">
                     <td *ngIf="isLogged">
                         <button class="btn btn-danger" (click)="delete(Proyecto.id)">
-                            <i class="bi bi-trash-fill"></i> BORRAR</button>
+                            <i class="bi bi-trash-fill"></i> </button>
                     </td>
                 </tr>
             </tbody>
