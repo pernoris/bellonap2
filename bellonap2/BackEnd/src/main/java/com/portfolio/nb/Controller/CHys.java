@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/skill")
+@RequestMapping("/hys")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CHys {
 
@@ -45,8 +45,8 @@ public class CHys {
             return new ResponseEntity(new Mensaje("No existe la ID!"), HttpStatus.BAD_REQUEST);
         }
 
-        Hys skill = sHys.getOne(id).get();
-        return new ResponseEntity(skill, HttpStatus.OK);
+        Hys hys = sHys.getOne(id).get();
+        return new ResponseEntity(hys, HttpStatus.OK);
     }
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
@@ -59,35 +59,35 @@ public class CHys {
     }
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody dtoHys dtoskill) {
-        if (StringUtils.isBlank(dtoskill.getImg())) {
+    public ResponseEntity<?> create(@RequestBody dtoHys dtohys) {
+        if (StringUtils.isBlank(dtohys.getImg())) {
             return new ResponseEntity(new Mensaje("El link es obligatorio!"), HttpStatus.BAD_REQUEST);
         }
 
-        Hys skill = new Hys(
-                dtoskill.getImg(), dtoskill.getProgreso()
+        Hys hys = new Hys(
+                dtohys.getImg(), dtohys.getProgreso()
         );
-        sHys.save(skill);
+        sHys.save(hys);
         return new ResponseEntity(new Mensaje("Skill creada!"), HttpStatus.OK);
 
     }
     //@PreAuthorize("hasRole('ADMIN', 'USER')")
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoHys dtoskill) {
+    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoHys dtohys) {
         if (!sHys.existsById(id)) {
             return new ResponseEntity(new Mensaje("No existe la ID!"), HttpStatus.NOT_FOUND);
         }
         
-        if (StringUtils.isBlank(dtoskill.getImg())) {
+        if (StringUtils.isBlank(dtohys.getImg())) {
             return new ResponseEntity(new Mensaje("El link no puede estar vacio!"), HttpStatus.BAD_REQUEST);
         }
 
-        Hys skill = sHys.getOne(id).get();
+        Hys hys = sHys.getOne(id).get();
 
-        skill.setImg(dtoskill.getImg());
-        skill.setProgreso(dtoskill.getProgreso());
+        hys.setImg(dtohys.getImg());
+        hys.setProgreso(dtohys.getProgreso());
 
-        sHys.save(skill);
+        sHys.save(hys);
 
         return new ResponseEntity(new Mensaje("Skill actualizada!"), HttpStatus.OK);
     }
